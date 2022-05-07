@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBar">
+        <attr name="titleBarTitle_st" format="string" />    <!--标题-->
+        <attr name="titleBarRightText_st" format="string" />    <!--右边文字-->
+        <attr name="titleBarTextColor" format="color" />    <!--右边文字颜色|标题颜色-->
+        <attr name="titleBarLeftImage_st" format="reference" />     <!--左边图标-->
+        <attr name="titleBarRightImage_st" format="reference" />    <!--右边图标-->
+        <attr name="titleBarBackground_st" format="reference|color" />      <!--背景色-->
+    </declare-styleable>
+
+</resources>
