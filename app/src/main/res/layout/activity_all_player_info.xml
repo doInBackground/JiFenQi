@@ -8,18 +8,77 @@
     android:orientation="vertical"
     tools:context=".AllPlayerInfoActivity">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="玩家计分信息"
+            android:textColor="#292929"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/btn_title_right_back_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="返回主页"
+            android:textColor="#292929"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
     <com.wei.base.BaseTitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:titleBarRightText_st="单局结算"
         app:titleBarTitle_st="玩家计分信息" />
+
 
     <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scrollbars="none"
         android:verticalSpacing="4dp" />
+
+
+    <TextView
+        android:id="@+id/tv_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:background="@drawable/selector_rectangle_common"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="单局结算"
+        android:textColor="@color/selector_gray_to_pink"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_all_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:background="@drawable/selector_rectangle_common"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="全部对局记录"
+        android:textColor="@color/selector_gray_to_pink"
+        android:textSize="15sp" />
 
 </LinearLayout>

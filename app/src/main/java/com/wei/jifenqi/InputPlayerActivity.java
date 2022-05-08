@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.wei.adapter.InputPlayerAdapter;
@@ -41,6 +42,8 @@ public class InputPlayerActivity extends Activity implements View.OnClickListene
      * Filed Comment:ListView的适配器.
      */
     private InputPlayerAdapter mAdapter;
+    private Button mBtnCancel;
+    private Button mBtnOk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,8 @@ public class InputPlayerActivity extends Activity implements View.OnClickListene
     private void initView() {
         mTitleBar = findViewById(R.id.title_bar);
         mLv = findViewById(R.id.lv);
+        mBtnCancel = findViewById(R.id.btn_cancel);
+        mBtnOk = findViewById(R.id.btn_ok);
     }
 
     private void initData() {
@@ -77,17 +82,22 @@ public class InputPlayerActivity extends Activity implements View.OnClickListene
     private void addListener() {
         mTitleBar.setLeftLayoutClickListener(this);//左上角返回键.
         mTitleBar.setRightLayoutClickListener2(this);//右上角文字
+        mBtnCancel.setOnClickListener(this);
+        mBtnOk.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_cancel:
             case R.id.btn_title_left://返回键
                 finish();
                 break;
+            case R.id.btn_ok:
             case R.id.btn_title_right2://"开始计分"
                 String playerInfoJson = JsonUtil.beanListToJson(mAdapter.getData());
                 SharedPreferencesUtils.setParam(ConstantForSharedPreferences.PLAYER_GRADE_INFO, playerInfoJson);
+                SharedPreferencesUtils.setParam(ConstantForSharedPreferences.RECORD_INFO, "");
                 Log.d("WWW", playerInfoJson);
                 startActivity(new Intent(this, AllPlayerInfoActivity.class));
                 finish();

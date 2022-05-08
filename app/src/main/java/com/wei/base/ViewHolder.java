@@ -20,7 +20,7 @@ public class ViewHolder {
     private int mPosition;
     private View mConvertView;
 
-    public ViewHolder(Context context, ViewGroup parent, int layoutId, int position) {
+    private ViewHolder(Context context, ViewGroup parent, int layoutId, int position) {
         this.mPosition = position;
         this.mViews = new SparseArray<>();
         mConvertView = LayoutInflater.from(context).inflate(layoutId, parent, false);

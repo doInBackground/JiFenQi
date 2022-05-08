@@ -15,4 +15,10 @@ public interface ConstantForSharedPreferences {
      */
     String PLAYER_GRADE_INFO = "playerGradeInfo";
 
+    /**
+     * Filed Comment:对局记录.
+     * 值类型-String: Json字符串.
+     */
+    String RECORD_INFO = "recordInfo";
+
 }

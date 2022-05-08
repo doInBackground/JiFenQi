@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F7F7F7"
+    android:background="#00F7F7F7"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/tv_num_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1号玩家 : XXX"
+        android:text="对局时间"
         android:textColor="#000"
-        android:textSize="15sp" />
-
-    <TextView
-        android:id="@+id/tv_grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="分数 : 0"
-        android:textColor="#F00"
         android:textSize="25sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/tv_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="对局记录"
+        android:textColor="#222"
+        android:textSize="15sp" />
 
 </LinearLayout>
