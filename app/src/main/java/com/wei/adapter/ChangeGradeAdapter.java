@@ -60,6 +60,7 @@ public class ChangeGradeAdapter extends CommonAdapter<PlayerInfo> implements Vie
                     int position = (int) view.getTag();
                     PlayerInfo player = this.getData().get(position);
                     player.setGrade(grade);
+                    setLastGrade(position);
                 } catch (Exception e) {
                     ToastUtils.showToast("减少出错", 500);
                 }
@@ -75,10 +76,26 @@ public class ChangeGradeAdapter extends CommonAdapter<PlayerInfo> implements Vie
                     int position = (int) view.getTag();
                     PlayerInfo player = this.getData().get(position);
                     player.setGrade(grade);
+                    setLastGrade(position);
                 } catch (Exception e) {
                     ToastUtils.showToast("增加出错", 500);
                 }
                 break;
+        }
+    }
+
+    //自动计算并设置最后一位玩家的分数.
+    private void setLastGrade(int position) {
+        //如果是倒数第二位玩家,自动计算并显示倒数第一位玩家分数.
+        if ((this.getData().size() - 2) == position) {//是倒数第二位玩家
+            int count = 0;//除开倒数第一位玩家,其他玩家的分数总和.
+            for (int i = 0; i < this.getData().size(); i++) {
+                if (i <= (this.getData().size() - 2)) {
+                    count += this.getData().get(i).getGrade();
+                }
+            }
+            this.getData().get(this.getData().size() - 1).setGrade((-count));//自动设置最后一位的分数.
+            notifyDataSetChanged();
         }
     }
 }
