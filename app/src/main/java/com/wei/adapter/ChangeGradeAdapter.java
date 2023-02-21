@@ -35,13 +35,19 @@ public class ChangeGradeAdapter extends CommonAdapter<PlayerInfo> implements Vie
         //找控件
         ImageView ivGradeCut = holder.getView(R.id.iv_grade_cut);
         ImageView ivGradeAdd = holder.getView(R.id.iv_grade_add);
-//        TextView tvGrade = holder.getView(R.id.tv_grade);
+        TextView tvGrade = holder.getView(R.id.tv_grade);
         //记标记
         ivGradeCut.setTag(holder.getPosition());
         ivGradeAdd.setTag(holder.getPosition());
         //点击事件
         ivGradeCut.setOnClickListener(this);
         ivGradeAdd.setOnClickListener(this);
+        //数据处理
+        if (bean.isChange()) {
+            tvGrade.setTextColor(0xFFFF0000);
+        } else {
+            tvGrade.setTextColor(0xFF000000);
+        }
     }
 
 
@@ -56,11 +62,10 @@ public class ChangeGradeAdapter extends CommonAdapter<PlayerInfo> implements Vie
                     int grade = Integer.parseInt(tvGrade.getText().toString());//当前变化分数
                     grade--;
                     tvGrade.setText(grade + "");
+                    tvGrade.setTextColor(0xFFFF0000);
                     //实际数据改变
                     int position = (int) view.getTag();
-                    PlayerInfo player = this.getData().get(position);
-                    player.setGrade(grade);
-                    setLastGrade(position);
+                    setLastOneGrade(grade, position);
                 } catch (Exception e) {
                     ToastUtils.showToast("减少出错", 500);
                 }
@@ -72,15 +77,40 @@ public class ChangeGradeAdapter extends CommonAdapter<PlayerInfo> implements Vie
                     int grade = Integer.parseInt(tvGrade.getText().toString());//当前变化分数
                     grade++;
                     tvGrade.setText(grade + "");
+                    tvGrade.setTextColor(0xFFFF0000);
                     //实际数据改变
                     int position = (int) view.getTag();
-                    PlayerInfo player = this.getData().get(position);
-                    player.setGrade(grade);
-                    setLastGrade(position);
+                    setLastOneGrade(grade, position);
                 } catch (Exception e) {
                     ToastUtils.showToast("增加出错", 500);
                 }
                 break;
+        }
+    }
+
+    //改变当前玩家的分数,且自动计算最后一个没有设置分数的玩家的分数.(当前玩家分数,当前玩家索引)
+    private void setLastOneGrade(int grade, int position) {
+        //设置当前玩家分数.
+        List<PlayerInfo> playerList = this.getData();
+        PlayerInfo player = playerList.get(position);
+        player.setGrade(grade);
+        player.setChange(true);
+        //判断还有几个玩家没设置过分数.
+        int noChangeCount = 0;//没有计算过分数的玩家数量.
+        int noChangeIndex = -1;//最后一个没有计算过分数的玩家的索引.
+        int changeCount = 0;//已经计算过分数的玩家的分数总和.
+        for (int i = 0; i < playerList.size(); i++) {
+            PlayerInfo playerInfo = playerList.get(i);
+            if (!playerInfo.isChange()) {
+                noChangeCount += 1;
+                noChangeIndex = i;
+            } else {
+                changeCount += playerInfo.getGrade();
+            }
+        }
+        if (noChangeCount == 1 && noChangeIndex >= 0) {//只剩一个玩家没设置过分数.
+            playerList.get(noChangeIndex).setGrade(-changeCount);//自动设置最后一位没计算分数的玩家的分数.
+            notifyDataSetChanged();
         }
     }
 

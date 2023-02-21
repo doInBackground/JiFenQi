@@ -186,6 +186,7 @@ public class AllPlayerInfoActivity extends Activity implements View.OnClickListe
                     //要变化的积分清除
                     for (PlayerInfo player : adapter.getData()) {
                         player.setGrade(0);
+                        player.setChange(false);
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -271,6 +272,7 @@ public class AllPlayerInfoActivity extends Activity implements View.OnClickListe
         //要变化的积分清除
         for (PlayerInfo player : players2) {
             player.setGrade(0);
+            player.setChange(false);
         }
         adapter.notifyDataSetChanged();
     }

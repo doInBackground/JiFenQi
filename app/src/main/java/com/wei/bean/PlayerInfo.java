@@ -11,6 +11,7 @@ public class PlayerInfo {
     private int mNum;//位号(唯一标识)
     private String mName;//名字
     private int mGrade;//当前分数<也有用作记录当局变化分数的地方>
+    private boolean mIsChange;//当前玩家分数是否变动过了
 
 
     public PlayerInfo(int num, String name, int grade) {
@@ -41,6 +42,14 @@ public class PlayerInfo {
 
     public void setGrade(int grade) {
         mGrade = grade;
+    }
+
+    public boolean isChange() {
+        return mIsChange;
+    }
+
+    public void setChange(boolean change) {
+        mIsChange = change;
     }
 
     @Override
