@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -26,4 +28,42 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+rootProject.ext {
+    version_name = getVersionName() //供module的build.gradle中以rootProject.version_name使用.
+    version_code = getVersionCode() //供module的build.gradle中以rootProject.version_code使用.
+    System.out.println("[版本名: " + version_name + "] " + "[版本号: " + version_code + "] ") //打印.
+    System.out.println("全局值构建完毕!!!!") //打印.
+}
+
+//获取版本名.
+def getVersionName() {
+    //用本地日期,作为版本名. 日期格式:[yyyy-MM-dd HH:mm:ss]
+//    String currentDate = new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC")) //当前日期获取[方法1].
+//    String currentDate = new SimpleDateFormat("yyyyMMdd").format(System.currentTimeMillis()) //当前日期获取[方法2].
+    String currentDate = new SimpleDateFormat("yyyyMMdd").format(new Date()) //当前日期获取[方法3].
+    return "4.0." + (isReleaseBuildType() ? currentDate : (currentDate + "_Debug"))
+}
+
+//获取版本号.
+static def getVersionCode() {
+    //版本号只能传int值,int的最大值是2147483647[10位],故返回值不能大于此数.
+    //时间戳:System.currentTimeMillis()=1672913866506[13位](单位:毫秒[ms],从[1970.01.01 8:00:00]开始计时,到[2286.11.21 01:46:39]才能升到14位,故可认定这辈子时间戳都是13位).
+    //故:13位时间戳转版本号时,为保证小于10位,需要省略后4位,变成9位数.(此时时间戳单位为"十秒",即两次编译时间间隔超过十秒,版本号就会不同)
+    return (int) (System.currentTimeMillis() / 10000) //版本号=时间戳/10000.
+}
+
+//判断[Release|Debug]包.(注意:用AS打包时该方法准确,用Jenkins打包时该方法不准确)
+//查看APK签名证书信息,有信息则是Release包,显示"不是已签名的jar文件"则是Debug包,指令如下: keytool -printcert -jarfile xxx.apk
+boolean isReleaseBuildType() {//判断是否Release包.
+    boolean isRelease = false
+    for (String s : gradle.startParameter.taskNames) {
+        if (s.contains("Release") | s.contains("release")) {
+            isRelease = true
+            break
+        }
+    }
+    System.out.println("[编译类型: " + (isRelease ? "Release" : "Debug") + "]") //打印.
+    return isRelease
 }

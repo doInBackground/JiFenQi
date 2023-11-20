@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:text="请输入1号玩家代号:"
         android:textColor="#000"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_name"

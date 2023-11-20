@@ -10,7 +10,7 @@
         android:id="@+id/tv_num_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1号玩家 : XXX"
+        android:text="1号玩家(XXX)"
         android:textColor="#000"
         android:textSize="15sp" />
 
@@ -39,11 +39,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:inputType="number"
-            android:paddingBottom="10dp"
             android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="0"
             android:textColor="#FF000000"
-            android:textSize="20sp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
 
         <ImageView

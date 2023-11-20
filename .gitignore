@@ -119,6 +119,7 @@ lint/tmp/
 /build/
 
 /app/release/
+/app/debug/
 # Demo: ============================>
 # /src/main/assets/* 表示:忽略同级目录src/main/assets下的所有文件.
 # !/src/main/assets/bin/ 表示:不忽略同级目录src/main/assets/bin下的所有文件.(注意要在上一行的后面;且上一行要有*才会遍历到bin文件夹,此行才能生效).
